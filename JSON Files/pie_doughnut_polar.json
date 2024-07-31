@@ -1,0 +1,9 @@
+[
+    {
+        "type" : "pie",
+        "x" : ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "y" : [12233, 31223, 5435, 35365, 24556, 3411, 1323],
+        "label" : "Pie Chart"
+    }
+]
+  
