@@ -1,5 +1,5 @@
 # WEB-FullStack-Project HW2
-The implementation of the Interactive Infographics for HW2 in the WEB course
+The implementation of the Interactive Infographics for the WEB course
 <br>
 <br>
 If you wish to clone the repo into your workspace, please consider the following:
