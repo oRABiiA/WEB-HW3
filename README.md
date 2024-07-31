@@ -1,4 +1,4 @@
-# WEB-FullStack-Project HW2
+# WEB-FullStack-Project, Interactive Infographics
 The implementation of the Interactive Infographics for the WEB course
 <br>
 <br>
