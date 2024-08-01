@@ -61,7 +61,7 @@ const About = ({ setCurrentPage }) => {
           >
             <li>Intuitive drag-and-drop interface</li>
             <li>JSON file upload support</li>
-            <li>Customizable 2X2 matrix layout</li>
+            <li>Customizable matrix layout</li>
             <li>Wide range of graph types and styles</li>
             <li>Real-time collaboration tools</li>
             <li>Download any graph that you see</li>
