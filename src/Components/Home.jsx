@@ -201,7 +201,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
               Go to Upload Page
             </button>
             <button
-              className="mt-4 text-blue-600 hover:underline block mx-auto"
+              className="mt-4 text-red-500 hover:underline block mx-auto"
               onClick={handleLogout}
             >
               Logout
@@ -297,7 +297,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
               </button>
             </div>
             <button
-              className="text-blue-600 hover:underline text-sm mt-4"
+              className="text-red-500 hover:underline text-sm mt-4"
               onClick={() => setShowForgotPassword(true)}
             >
               Forgot Password?

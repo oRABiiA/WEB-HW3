@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "../App";
 import ChartHeader from "./ChartHeader.jsx";
@@ -546,7 +546,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
     tempCanvas.height = canvas.height;
 
     // Set the background color based on the theme
-    tempContext.fillStyle = isDarkMode ? "#333" : "#fff"; // Adjust this to match your dark/light mode background
+    tempContext.fillStyle = isDarkMode ? "#333" : "#fff";
     tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
 
     // Draw the chart on the temporary canvas

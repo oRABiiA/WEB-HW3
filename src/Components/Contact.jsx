@@ -112,7 +112,7 @@ const Contact = ({ setCurrentPage }) => {
               <h2 className="text-xl font-bold mb-4">Other Ways to Reach Us</h2>
               <p>
                 <span className="font-bold">📧 Email:</span>{" "}
-                interactiveInfo@gmail.com
+                interactiveinfographics614@gmail.com
               </p>
               <p>
                 <span className="font-bold">📞 Phone:</span> (052)2138429
