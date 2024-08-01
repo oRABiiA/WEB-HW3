@@ -29,14 +29,14 @@ const Home = ({ setCurrentPage, user, setUser }) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedUser = JSON.parse(sessionStorage.getItem("user"));
     if (storedUser) {
       setUser(storedUser);
     }
   }, [setUser]);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     setUser(null);
   };
 
@@ -123,7 +123,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
         }
 
         setError("");
-        localStorage.setItem(
+        sessionStorage.setItem(
           "user",
           JSON.stringify({ name: user.name, email: user.email })
         );
@@ -201,7 +201,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
               Go to Upload Page
             </button>
             <button
-              className="mt-4 text-red-500 hover:underline block mx-auto"
+              className="mt-4 text-blue-600 hover:underline block mx-auto"
               onClick={handleLogout}
             >
               Logout
@@ -297,7 +297,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
               </button>
             </div>
             <button
-              className="text-red-500 hover:underline text-sm mt-4"
+              className="text-blue-600 hover:underline text-sm mt-4"
               onClick={() => setShowForgotPassword(true)}
             >
               Forgot Password?
