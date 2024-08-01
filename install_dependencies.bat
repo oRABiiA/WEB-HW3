@@ -8,5 +8,6 @@ npm install react aos
 npm install prop-types
 npm install react-tailwindcss-select
 npm install firebase
+npm install chart.js
 echo All dependencies installed.
 
