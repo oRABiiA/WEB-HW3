@@ -29,10 +29,21 @@ const Home = ({ setCurrentPage, user, setUser }) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
+    const handleBeforeUnload = () => {
+      sessionStorage.removeItem("user");
+      setUser(null);
+    };
+
     const storedUser = JSON.parse(sessionStorage.getItem("user"));
     if (storedUser) {
       setUser(storedUser);
     }
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, [setUser]);
 
   const handleLogout = () => {
