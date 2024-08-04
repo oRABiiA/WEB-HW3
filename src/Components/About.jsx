@@ -125,10 +125,7 @@ const About = ({ setCurrentPage }) => {
             Start Your Data Visualization Journey{""}
             <span className="ml-2">🚀</span> Ready to bring your data to life?{" "}
             <span
-              className="text-blue-500 cursor-pointer hover:underline"
-              onClick={() => {
-                setCurrentPage("home", { scrollToBottom: true });
-              }}
+              className="text-blue-500 underline"
             >
               Sign up
             </span>{" "}

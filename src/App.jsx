@@ -1,8 +1,8 @@
 import { useState, createContext, useContext, useEffect } from "react";
-import Home from "./Components/Home.jsx";
+import Home from "./Components/Home-Components/Home.jsx";
 import Footer from "./Components/Footer";
-import UploadPage from "./Components/UploadPage.jsx";
-import ChartPage from "./Components/ChartPage.jsx";
+import UploadPage from "./Components/UploadPage-Components/UploadPage.jsx";
+import ChartPage from "./Components/ChartPage-Components/ChartPage.jsx";
 import Header from "./Components/Header.jsx";
 import About from "./Components/About.jsx";
 import Contact from "./Components/Contact.jsx";

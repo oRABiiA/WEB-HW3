@@ -1,15 +1,15 @@
 import { useRef, useState, useEffect } from "react";
-import { useTheme } from "../App";
+import { useTheme } from "../../App.jsx";
 import { RiTwitterXFill } from "react-icons/ri";
 import { BiLogoFacebook } from "react-icons/bi";
-import lightHome from "../assets/Backgrounds/homeChartLight.jpg";
-import darkHome from "../assets/Backgrounds/homeChartDark.jpg";
+import lightHome from "../../assets/Backgrounds/homeChartLight.jpg";
+import darkHome from "../../assets/Backgrounds/homeChartDark.jpg";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import RegisterCard from "./RegisterCard.jsx";
 import { ref, get } from "firebase/database";
-import { database } from "../DB/firebase.js";
+import { database } from "../../DB/firebase.js";
 import ForgotPasswordCard from "./ForgotPasswordCard.jsx";
 import SuccessMessageCard from "./SuccessMessageCard.jsx";
 
@@ -29,39 +29,48 @@ const Home = ({ setCurrentPage, user, setUser }) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
+    // Retrieve user data from local storage if available
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
       setUser(storedUser);
     }
   }, [setUser]);
 
+  // Function to handle user logout
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
   };
 
+  // Function to toggle password visibility
   const toggleVisibility = () => {
     setIsPassword(!isPassword);
     inputRef.current.type = isPassword ? "text" : "password";
   };
 
+  // Function to handle input value change for the password field
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
+  // Function to handle input value change for the email field
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
+  // Function to navigate to Facebook
   const navigateToFacebook = () => {
     window.location.href = "https://www.facebook.com";
   };
 
+  // Function to navigate to Twitter
   const navigateToTwitter = () => {
     window.location.href = "https://www.x.com";
   };
 
+  // Function to scroll to a target element on the page
   const scrollToTarget = () => {
+    // Determine the target to scroll to based on the user state
     const targetRef = user
       ? footerRef
       : uploadButtonRef.current
@@ -93,6 +102,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
     }
   };
 
+  // Function to handle user login
   const handleLogin = async () => {
     if (!email || !inputValue) {
       setError("All fields must be filled");
@@ -138,11 +148,13 @@ const Home = ({ setCurrentPage, user, setUser }) => {
     }
   };
 
+  // Function to handle successful registration
   const handleRegisterSuccess = () => {
     setShowRegister(false);
     setShowSuccessMessage(true);
   };
 
+  // Function to render the scrolling indicator
   const renderScroller = () => (
     <div className="absolute xs:bottom-10 top-48 w-full flex justify-center items-center">
       <div
@@ -174,6 +186,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
 
   return (
     <section>
+      {/* Background container with dynamic background based on theme */}
       <div
         className={`bg-contain bg-center h-screen flex flex-col justify-end ${
           mainPageTheme === "darkHome" ? "bg-customDark" : "bg-customBlue"
@@ -188,11 +201,15 @@ const Home = ({ setCurrentPage, user, setUser }) => {
           margin: "0 auto",
         }}
       ></div>
+      {/* Render the scrolling indicator */}
       {renderScroller()}
 
+      {/* Conditional rendering based on whether the user is logged in */}
       {user ? (
         <>
+          {/* User logged in view */}
           <div className="mt-8 mb-20 text-center">
+            {/* Button to navigate to the upload page */}
             <button
               ref={uploadButtonRef}
               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -200,6 +217,8 @@ const Home = ({ setCurrentPage, user, setUser }) => {
             >
               Go to Upload Page
             </button>
+
+            {/* Logout button */}
             <button
               className="mt-4 text-red-500 hover:underline block mx-auto"
               onClick={handleLogout}
@@ -207,6 +226,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
               Logout
             </button>
           </div>
+          {/* Render the footer */}
           <Footer />
         </>
       ) : (
@@ -216,6 +236,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
           }`}
           data-aos="fade-up"
         >
+          {/* Login section */}
           <section
             className={`bg-opacity-70 p-10 md:p-20 rounded-2xl w-full max-w-md mx-auto ${
               isDarkMode ? "bg-gray-600" : "bg-gray-300"
@@ -223,6 +244,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
           >
             <div className="text-center md:text-left flex items-center justify-center md:justify-start">
               <label className="mr-2 text-black font-bold">Sign in with</label>
+              {/* Button to navigate to Facebook */}
               <button
                 type="button"
                 className="mx-1 h-9 w-9 rounded-full bg-blue-500 border-blue-500 hover:bg-neutral-500 text-white shadow-[0_4px_9px_-4px_#e5e5e5] transition-colors duration-1000"
@@ -233,6 +255,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
                   className="flex justify-center items-center w-full"
                 />
               </button>
+              {/* Button to navigate to Twitter */}
               <button
                 type="button"
                 className="mx-1 h-9 w-9 rounded-full bg-black border-black text-white hover:bg-neutral-500 uppercase leading-normal shadow-[0_4px_9px_-4px_#e5e5e5] transition-colors duration-1000"
@@ -247,11 +270,13 @@ const Home = ({ setCurrentPage, user, setUser }) => {
             <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-black after:mt-0.5 after:flex-1 after:border-t after:border-black">
               <p className="mx-4 mb-0 text-center font-bold text-black">Or</p>
             </div>
+            {/* Error message display */}
             {error && (
               <p className="text-red-600 text-lg font-bold text-center mb-4">
                 {error}
               </p>
             )}
+            {/* Email input field */}
             <input
               className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded text-black font-bold"
               type="text"
@@ -260,6 +285,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
               onChange={handleEmailChange}
             />
             <div className="relative mt-4">
+              {/* Password input field */}
               <input
                 ref={inputRef}
                 className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded text-black font-bold pr-10 transition-all duration-300"
@@ -268,6 +294,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
                 value={inputValue}
                 onChange={handleInputChange}
               />
+              {/* Toggle password visibility button */}
               <button
                 onClick={toggleVisibility}
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 focus:outline-none"
@@ -306,6 +333,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
         </div>
       )}
 
+      {/* Conditional rendering for modals */}
       {showRegister && (
         <RegisterCard
           onClose={() => setShowRegister(false)}

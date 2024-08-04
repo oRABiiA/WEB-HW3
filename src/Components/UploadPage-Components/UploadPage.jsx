@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import { useTheme } from "../App";
-import { useData } from "../App";
+import { useTheme } from "../../App.jsx";
+import { useData } from "../../App.jsx";
 import { useEffect, useState } from "react";
-import BackArrow from "../assets/Charts/arrow-small-left.png";
+import BackArrow from "../../assets/Charts/arrow-small-left.png";
 import InfoCard from "./InfoCard.jsx";
 
 const UploadPage = ({ setCurrentPage, user }) => {

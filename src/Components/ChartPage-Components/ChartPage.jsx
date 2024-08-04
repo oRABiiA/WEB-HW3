@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useTheme } from "../App";
+import { useTheme } from "../../App.jsx";
 import ChartHeader from "./ChartHeader.jsx";
-import BackArrow from "../assets/Charts/arrow-small-left.png";
+import BackArrow from "../../assets/Charts/arrow-small-left.png";
 import Chart from "chart.js/auto";
 
 const ChartPage = ({ data, setCurrentPage }) => {
@@ -11,6 +11,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
   const chartRef = useRef(null);
   const canvasRef = useRef(null);
 
+  // Function to generate the chart configuration based on the chart type
   const generateChart = () => {
     const chartType = data[0].type.toLowerCase();
 
@@ -38,6 +39,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
     }
   };
 
+  // Array of colors used in the chart datasets
   const arrayColors = [
     "rgba(63, 81, 181, 0.5)",
     "rgba(77, 182, 172, 0.5)",
@@ -53,6 +55,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
     "rgba(158, 158, 158, 0.5)",
   ];
 
+  // Generates the configuration for a bar chart
   const generateBarChart = () => ({
     type: "bar",
     data: {
@@ -518,6 +521,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
     );
   };
 
+  // useEffect to create the chart instance and destroy it when the component unmounts
   useEffect(() => {
     const ctx = canvasRef.current.getContext("2d");
 
@@ -535,6 +539,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
     };
   }, [data, isDarkMode]);
 
+  // Function to download the chart as an image
   const downloadChart = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -561,15 +566,18 @@ const ChartPage = ({ data, setCurrentPage }) => {
 
   return (
     <section>
+      {/* Back button container with fixed positioning */}
       <div
         className={`fixed bottom-40 left-10 w-16 h-16 p-2 shadow-2xl rounded-full z-10 flex items-center justify-center transition-colors duration-500 ease-in-out ${
           isDarkMode ? "bg-gray-600" : "bg-gray-400"
         }`}
       >
+        {/* Button to navigate back to the upload page */}
         <button
           onClick={() => setCurrentPage("uploadPage")}
           className="w-full h-full rounded-full bg-white text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white flex items-center justify-center"
         >
+          {/* Back arrow icon */}
           <img
             src={BackArrow}
             alt="Back"
@@ -578,21 +586,27 @@ const ChartPage = ({ data, setCurrentPage }) => {
         </button>
       </div>
 
+      {/* Main content container with dynamic background color */}
       <div
         className={`transition-colors duration-500 ease-in-out ${
           isDarkMode ? "bg-customDark" : "bg-customBlue"
         } mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8`}
       >
+        {/* Chart header component */}
         <ChartHeader data={data} mode={isDarkMode ? "dark" : "light"} />
+
+        {/* Chart container with rounded corners and shadow */}
         <div
           className={`relative isolate overflow-hidden rounded-3xl px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0 m-6 ${
             isDarkMode ? "bg-gray-800" : "bg-gray-300"
           }`}
         >
           <div className="flex flex-col items-center justify-center w-full h-full lg:ml-30 sm:pb-20">
+            {/* Canvas element for rendering the chart */}
             <div className="relative mt-16 lg:mt-8 lg:pt-5 w-4/5 h-[400px]">
               <canvas ref={canvasRef} />
             </div>
+            {/* Button to download the chart */}
             <button
               onClick={downloadChart}
               className={`mb-6 mt-4 px-4 py-2 rounded-md ${

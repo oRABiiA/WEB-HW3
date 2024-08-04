@@ -28,14 +28,20 @@ const CreatePage = ({ setCurrentPage }) => {
     ];
 
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
+    // State for chart size selection
     const [size, setSize] = useState(null);
+    // State for additional chart configurations based on size
     const [additionalSelects, setAdditionalSelects] = useState([]);
+    // State for chart data to be rendered
     const [chartsData, setChartsData] = useState([]);
+    // State to trigger chart creation
     const [createON,setCreate]=useState(null);
+    // State for determining if all charts are of PDP type, PDP means pie,doughnut and polarArea charts
     const [PDP,setPDP]=useState(null);
+    // State for storing sizes of charts
     const [chartSizes, setChartSizes] = useState([]);
 
+    // Handle size selection change
     const handleChange = (value) => {
         handleClearButton();
         setSize(value);
@@ -50,6 +56,7 @@ const CreatePage = ({ setCurrentPage }) => {
         setChartSizes(Array(numSelects).fill({ width: '500px', height: '500px' })); // Initialize sizes
     };
 
+    // Handle chart type selection change for additional charts
     const handleAdditionalChange = (index, value) => {
         const newAdditionalSelects = [...additionalSelects];
         newAdditionalSelects[index].chartType = value;
@@ -57,19 +64,21 @@ const CreatePage = ({ setCurrentPage }) => {
 
     };
 
+    // Handle data input changes for each chart
     const handleDataInputChange = (chartIndex, dataIndex, newValue) => {
         const newAdditionalSelects = [...additionalSelects];
         newAdditionalSelects[chartIndex].dataInputs[dataIndex] = newValue;
         setAdditionalSelects(newAdditionalSelects);
     };
 
-
+    // Handle name input changes for each chart
     const handleNameInputChange = (selectIndex, inputIndex, value) => {
         const newAdditionalSelects = [...additionalSelects];
         newAdditionalSelects[selectIndex].nameInputs[inputIndex] = value;
         setAdditionalSelects(newAdditionalSelects);
     };
 
+    // Clear all selections and states
     const handleClearButton = () => {
         setSize(null);
         setAdditionalSelects([]);
@@ -78,8 +87,8 @@ const CreatePage = ({ setCurrentPage }) => {
         setPDP(null);
     };
 
+    // Create charts based on selected configurations
     const handleCreateButton = () => {
-        // const counter=0;
         const datasets = additionalSelects.map((item) => ({
             label: 'Data',
             data: item.dataInputs.map((input) => parseInt(input, 10) || 0),
@@ -102,25 +111,28 @@ const CreatePage = ({ setCurrentPage }) => {
         if (allSameType && isOneOfPDPTypes) {
             setPDP('1');
         }
+        // Scroll to charts section after creation
         if (chartsRef.current) {
             chartsRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
 
-
+    // Handle color change for bar, line, and radar charts
     const handleBLRcolorChange = (selectIndex,  value) =>{
         const newAdditionalSelects = [...additionalSelects];
         newAdditionalSelects[selectIndex].colorBLR = value;
         setAdditionalSelects(newAdditionalSelects);
     }
 
+    // Handle color change for pie, doughnut, and polar area charts
     const handlePDPcolorChange = (selectIndex, inputIndex , value) =>{
         const newAdditionalSelects = [...additionalSelects];
         newAdditionalSelects[selectIndex].colorPDP[inputIndex] = value;
         setAdditionalSelects(newAdditionalSelects);
     }
 
+    // Handle chart size change
     const handleChartSizeChange = (index, event) => {
         const { value } = event.target;
         let newSize;
@@ -142,6 +154,7 @@ const CreatePage = ({ setCurrentPage }) => {
 
     return (
         <section>
+            {/* Button to navigate back to the upload page*/}
             <div className="fixed bottom-40 left-10 w-16 h-16 bg-zinc-800 p-2 shadow-2xl rounded-full z-10 flex items-center justify-center">
                 <button
                     onClick={() => setCurrentPage("uploadPage")}
@@ -150,6 +163,7 @@ const CreatePage = ({ setCurrentPage }) => {
                     <img src={BackArrow} alt="Back" className="w-full h-full object-cover rounded-lg" />
                 </button>
             </div>
+            {/* Dropdown menu for selecting the chart size, with a label indicating "Size"*/}
             <div className="flex mt-4 mx-6 w-64">
                 <label className={`block mr-2 text-sm font-medium ${isDarkMode ? "text-white" : "text-black"}`}>
                     Size:
@@ -158,17 +172,19 @@ const CreatePage = ({ setCurrentPage }) => {
                     value={size}
                     onChange={handleChange}
                     options={SizeOptions}
-                    className="w-full" // Removed mb-2 to eliminate the margin below
+                    className="w-full"
                 />
             </div>
 
 
-
+            {/*Container for the additional chart options*/}
             {size && (
                 <div className="mt-4 mx-6 lg:mx-11">
+                    {/*Wrapper for each chart option set*/}
                     {additionalSelects.map((item, index) => (
                         <div key={index} className="mb-8 mt-4 flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6">
                             <div className="w-full lg:w-64">
+                                {/*Label and dropdown to select chart type*/}
                                 <label className={`block text-sm mb-2 font-medium ${isDarkMode ? "text-white" : "text-black"}`}>
                                     Chart {index + 1}:
                                 </label>
@@ -179,8 +195,10 @@ const CreatePage = ({ setCurrentPage }) => {
                                     className="w-full"
                                 />
                             </div>
+                            {/*Inputs for data points and labels for bar, line, and radar charts*/}
                             {item.chartType && (item.chartType.value === "bar" || item.chartType.value === "line" || item.chartType.value === "radar" ) && (
                                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 lg:gap-4 w-full">
+                                    {/*Data picker for bar, line, and radar charts*/}
                                     {item.dataInputs.map((inputValue, inputIndex) => (
                                         <div key={inputIndex} className="flex flex-col items-center">
                                             <label className={`block text-sm font-medium ${isDarkMode ? "text-white" : "text-black"}`}>
@@ -194,6 +212,7 @@ const CreatePage = ({ setCurrentPage }) => {
                                             />
                                         </div>
                                     ))}
+                                    {/*Label picker for bar, line, and radar charts*/}
                                     {item.nameInputs.map((inputValue, inputIndex) => (
                                         <div key={inputIndex} className="flex flex-col items-center">
                                             <label className={`block text-sm font-medium ${isDarkMode ? "text-white" : "text-black"}`}>
@@ -207,6 +226,7 @@ const CreatePage = ({ setCurrentPage }) => {
                                             />
                                         </div>
                                     ))}
+                                    {/*Color picker for bar, line, and radar charts*/}
                                     <label className={`flex flex-col items-center block text-sm mt-2 font-medium ${isDarkMode ? "text-white" : "text-black"}`}>
                                         Chart Color:
                                     </label>
@@ -221,8 +241,10 @@ const CreatePage = ({ setCurrentPage }) => {
                                     </div>
                                 </div>
                             )}
+                            {/*Inputs for data points and labels for pie, doughnut, and polar area charts*/}
                             {item.chartType && (item.chartType.value === "pie" || item.chartType.value === "polarArea" || item.chartType.value === "doughnut" ) && (
                                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 lg:gap-4 w-full">
+                                    {/*Data pickers for pie, doughnut, and polar area charts*/}
                                     {item.dataInputs.map((inputValue, inputIndex) => (
                                         <div key={inputIndex} className="flex flex-col items-center">
                                             <label className={`block text-sm font-medium ${isDarkMode ? "text-white" : "text-black"}`}>
@@ -236,6 +258,7 @@ const CreatePage = ({ setCurrentPage }) => {
                                             />
                                         </div>
                                     ))}
+                                    {/*Label pickers for pie, doughnut, and polar area charts*/}
                                     {item.nameInputs.map((inputValue, inputIndex) => (
                                         <div key={inputIndex} className="flex flex-col items-center ">
                                             <label className={`block text-sm font-medium ${isDarkMode ? "text-white" : "text-black"}`}>
@@ -249,6 +272,7 @@ const CreatePage = ({ setCurrentPage }) => {
                                             />
                                         </div>
                                     ))}
+                                    {/*Color pickers for pie, doughnut, and polar area charts*/}
                                     {item.colorPDP.map((inputValue, inputIndex) => (
                                         <div key={inputIndex} className="flex flex-col items-center">
                                             <div className="w-24">
@@ -268,7 +292,7 @@ const CreatePage = ({ setCurrentPage }) => {
                     ))}
                 </div>
             )}
-
+            {/*Buttons to create charts and clear selections*/}
             <div className="w-full flex justify-center mt-4 ">
                 <div className="w-full border-t border-gray-700" />
             </div>
@@ -288,6 +312,7 @@ const CreatePage = ({ setCurrentPage }) => {
                     </button>
                 </div>
             </div>
+            {/*Section for selecting chart size, this section will show up only if all charts types are PDP and the same type*/}
             {PDP && (
                 <div className="w-full flex flex-col sm:flex-row justify-center mt-4">
                     <label className={`block mt-4 text-sm font-medium ${isDarkMode ? "text-white" : "text-black"}`}>
@@ -306,7 +331,7 @@ const CreatePage = ({ setCurrentPage }) => {
                     ))}
                 </div>
             )}
-
+            {/*Chart component rendering with dynamic type and data*/}
             {createON && (
                 <div ref={chartsRef}
                      className={`transition-colors duration-500 ease-in-out ${isDarkMode ? "bg-customDark" : "bg-customBlue"} mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8`}

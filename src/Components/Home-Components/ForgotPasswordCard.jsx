@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaTimesCircle, FaEye, FaEyeSlash } from "react-icons/fa";
 import { ref, get, update } from "firebase/database";
-import { database } from "../DB/firebase.js";
+import { database } from "../../DB/firebase.js";
 
 const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
   const [email, setEmail] = useState("");
@@ -12,12 +12,17 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
   const [showForgotPasswordCard, setShowForgotPasswordCard] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
+
+  /**
+   * Handles the email submission to check if the email exists in the database.
+   * If the email is found, proceeds to the next step for password update.
+   */
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     try {
       const usersRef = ref(database, "users");
-      const snapshot = await get(usersRef);
+      const snapshot = await get(usersRef); // Fetches the users data from the database
       const users = snapshot.val();
 
       if (users) {
@@ -25,7 +30,7 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
           ([_, userData]) => userData.email === email
         );
         if (user) {
-          setStep(2);
+          setStep(2); // Proceeds to step 2 if the email is found
         } else {
           setMessage("Email not found");
         }
@@ -38,6 +43,10 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
     }
   };
 
+  /**
+   * Handles the password update for the user.
+   * Validates the new password length and updates it in the database.
+   */
   const handlePasswordUpdate = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -49,7 +58,7 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
 
     try {
       const usersRef = ref(database, "users");
-      const snapshot = await get(usersRef);
+      const snapshot = await get(usersRef); // Fetches the users data from the database
       const users = snapshot.val();
 
       if (users) {
@@ -60,9 +69,9 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
           ...userData,
           password: newPassword,
         });
-
         setShowForgotPasswordCard(false);
 
+        // Shows success card after a delay
         setTimeout(() => {
           setShowSuccessCard(true);
         }, 300);
@@ -73,10 +82,16 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
     }
   };
 
+  /**
+   * Toggles the visibility of the password input field.
+   */
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  /**
+   * Success card component to display a message indicating successful password update.
+   */
   const SuccessCard = () => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 transition-opacity duration-300 ease-in-out">
       <div

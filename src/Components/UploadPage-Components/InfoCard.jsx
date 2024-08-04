@@ -1,4 +1,4 @@
-import {useTheme} from "../App";
+import {useTheme} from "../../App.jsx";
 import {useState} from "react";
 import {TECollapse} from "tw-elements-react";
 
