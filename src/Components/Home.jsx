@@ -30,6 +30,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
 
   useEffect(() => {
     const handleBeforeUnload = () => {
+      localStorage.removeItem("user");
       sessionStorage.removeItem("user");
       setUser(null);
     };
@@ -37,6 +38,9 @@ const Home = ({ setCurrentPage, user, setUser }) => {
     const storedUser = JSON.parse(sessionStorage.getItem("user"));
     if (storedUser) {
       setUser(storedUser);
+    } else {
+      sessionStorage.removeItem("user"); // Clear session storage if user is not logged in
+      localStorage.removeItem("user");
     }
 
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -47,6 +51,7 @@ const Home = ({ setCurrentPage, user, setUser }) => {
   }, [setUser]);
 
   const handleLogout = () => {
+    localStorage.removeItem("user");
     sessionStorage.removeItem("user");
     setUser(null);
   };
