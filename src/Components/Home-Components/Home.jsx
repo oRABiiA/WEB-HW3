@@ -29,16 +29,32 @@ const Home = ({ setCurrentPage, user, setUser }) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("user");
+      sessionStorage.removeItem("user");
+      setUser(null);
+    };
+
     // Retrieve user data from local storage if available
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedUser = JSON.parse(sessionStorage.getItem("user"));
     if (storedUser) {
       setUser(storedUser);
+    } else {
+      sessionStorage.removeItem("user"); // Clear session storage if user is not logged in
+      localStorage.removeItem("user");
     }
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, [setUser]);
 
-  // Function to handle user logout
+    // Function to handle user logout
   const handleLogout = () => {
     localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     setUser(null);
   };
 
