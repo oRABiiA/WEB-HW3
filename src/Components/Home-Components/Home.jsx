@@ -11,7 +11,6 @@ import { ref, get } from "firebase/database";
 import { database } from "../../DB/firebase.js";
 import ForgotPasswordCard from "./ForgotPasswordCard.jsx";
 import SuccessMessageCard from "./SuccessMessageCard.jsx";
-import { motion } from "framer-motion";
 
 
 const Home = ({ setCurrentPage, user, setUser }) => {
@@ -85,39 +84,6 @@ const Home = ({ setCurrentPage, user, setUser }) => {
     window.location.href = "https://www.x.com";
   };
 
-  // Function to scroll to a target element on the page
-  const scrollToTarget = () => {
-    // Determine the target to scroll to based on the user state
-    const targetRef = user
-        ? footerRef
-        : uploadButtonRef.current
-            ? uploadButtonRef
-            : inputRef;
-    if (targetRef.current) {
-      const targetPosition =
-          targetRef.current.getBoundingClientRect().top + window.pageYOffset;
-
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      const duration = 800;
-      let start = null;
-
-      const smoothScroll = (timestamp) => {
-        if (!start) start = timestamp;
-        const progress = timestamp - start;
-        const progressPercentage = Math.min(progress / duration, 1);
-        window.scrollTo(0, startPosition + distance * progressPercentage);
-        if (progress < duration) {
-          requestAnimationFrame(smoothScroll);
-        } else {
-          if (!user) {
-            targetRef.current.focus();
-          }
-        }
-      };
-      requestAnimationFrame(smoothScroll);
-    }
-  };
 
   // Function to handle user login
   const handleLogin = async () => {
@@ -170,32 +136,6 @@ const Home = ({ setCurrentPage, user, setUser }) => {
     setShowRegister(false);
     setShowSuccessMessage(true);
   };
-
-  // Function to render the scrolling indicator
-  const renderScroller = () => (
-      <div className="absolute xs:bottom-10 top-48 w-full flex justify-center items-center">
-        <div
-            onClick={scrollToTarget}
-            className={`cursor-pointer w-[35px] h-[64px] rounded-3xl border-4 flex justify-center items-start p-2 ${
-                isDarkMode
-                    ? "bg-gray-700 border-gray-300"
-                    : "bg-gray-400 border-gray-300"
-            }`}
-        >
-          <motion.div
-              animate={{
-                y: [0, 24, 0],
-              }}
-              transition={{
-                duration: 2.1,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-              className="w-3 h-3 rounded-full bg-[#ffffff] mb-1"
-          />
-        </div>
-      </div>
-  );
 
   const Footer = () => (
       <footer ref={footerRef} className=" text-center p-1 mt-1"></footer>
