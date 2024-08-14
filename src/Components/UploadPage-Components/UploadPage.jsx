@@ -119,10 +119,11 @@ const UploadPage = ({ setCurrentPage, user }) => {
         );
         return false;
       } else {
-        return true;
+        setFileError("Error: Chart type is not supported");
+        return false;
       }
     } else {
-      setFileError("Error: JSON does not contain a valid type property.");
+      setFileError("Error: JSON does not contain a type property.");
       return false;
     }
   };
