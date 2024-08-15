@@ -1,4 +1,4 @@
-import { useTheme } from "../App";
+import { useTheme } from "../../App.jsx";
 
 const Contact = ({ setCurrentPage }) => {
   const { theme, toggleTheme } = useTheme();

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTheme } from "../App";
+import { useTheme } from "../../App.jsx";
 
 const FAQ = () => {
   const { theme } = useTheme();

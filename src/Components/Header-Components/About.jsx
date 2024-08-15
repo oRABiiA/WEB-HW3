@@ -1,4 +1,4 @@
-import { useTheme } from "../App";
+import { useTheme } from "../../App.jsx";
 
 const About = ({ setCurrentPage }) => {
   const { theme } = useTheme();

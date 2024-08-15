@@ -1,4 +1,4 @@
-import {useTheme} from "../App.jsx";
+import {useTheme} from "../../App.jsx";
 
 const Footer = () => {
     const navigateTo = (url) => {

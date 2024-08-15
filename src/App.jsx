@@ -1,12 +1,12 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import Home from "./Components/Home-Components/Home.jsx";
-import Footer from "./Components/Footer";
+import Footer from "./Components/Layout-Components/Footer.jsx";
 import UploadPage from "./Components/UploadPage-Components/UploadPage.jsx";
 import ChartPage from "./Components/ChartPage-Components/ChartPage.jsx";
-import Header from "./Components/Header.jsx";
-import About from "./Components/About.jsx";
-import Contact from "./Components/Contact.jsx";
-import FAQ from "./Components/FAQ.jsx";
+import Header from "./Components/Layout-Components/Header.jsx";
+import About from "./Components/Header-Components/About.jsx";
+import Contact from "./Components/Header-Components/Contact.jsx";
+import FAQ from "./Components/Header-Components/FAQ.jsx";
 import CreatePage from "./Components/CreatePage.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
