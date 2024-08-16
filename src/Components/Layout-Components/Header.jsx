@@ -1,12 +1,19 @@
 import {useState} from "react";
 import {useTheme} from "../../App.jsx";
 
+/**
+ * Header component that displays the navigation menu and theme toggle options.
+ * 
+ * @param {function} setCurrentPage - Function to set the current page.
+ */
+
 const Header = ({setCurrentPage}) => {
     const {theme, toggleTheme} = useTheme();
     const isDarkMode = theme === "dark";
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const navItems = ["Home", "About", "Contact", "FAQ"];
+    // SVG logos for dark and light modes
     const darkModeLogoSVG =
         <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40"
              viewBox="0 0 512 512">
@@ -31,8 +38,10 @@ const Header = ({setCurrentPage}) => {
         >
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between">
+                    {/* Logo component with dynamic logo based on the theme */}
                     <Logo isDarkMode={isDarkMode} setCurrentPage={setCurrentPage}
                           modeLogo={isDarkMode ? darkModeLogoSVG : lightModeLogoSVG}/>
+                    {/* Navigation menu  */}
                     <nav className="hidden md:flex flex-1 justify-center space-x-8 lg:space-x-32 font-bold">
                         {navItems.map((item) => (
                             <NavItem
@@ -43,9 +52,11 @@ const Header = ({setCurrentPage}) => {
                             />
                         ))}
                     </nav>
+                    {/* Dark mode toggle button  */}
                     <div className="hidden md:flex items-center">
                         <DarkModeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
                     </div>
+                    {/* Button to open/close mobile menu */}
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         className={`md:hidden text-3xl font-bold ${
@@ -56,6 +67,7 @@ const Header = ({setCurrentPage}) => {
                     </button>
                 </div>
             </div>
+            {/* Mobile menu */}
             {isMenuOpen && (
                 <MobileMenu
                     navItems={navItems}
@@ -67,6 +79,14 @@ const Header = ({setCurrentPage}) => {
         </header>
     );
 };
+
+/**
+ * Logo component displaying the logo and handling clicks to set the current page.
+ * 
+ * @param {boolean} isDarkMode - Indicates if dark mode is active.
+ * @param {function} setCurrentPage - Function to set the current page.
+ * @param {JSX.Element} modeLogo - The SVG logo based on the theme.
+ */
 
 const Logo = ({ isDarkMode, setCurrentPage, modeLogo }) => (
     <div
@@ -80,6 +100,13 @@ const Logo = ({ isDarkMode, setCurrentPage, modeLogo }) => (
     </div>
 );
 
+/**
+ * Navigation item component for each item in the menu.
+ * 
+ * @param {string} text - The text of the navigation item.
+ * @param {boolean} isDarkMode - Indicates if dark mode is active.
+ * @param {function} setCurrentPage - Function to set the current page.
+ */
 
 const NavItem = ({text, isDarkMode, setCurrentPage}) => (
     <a
@@ -112,6 +139,13 @@ const NavItem = ({text, isDarkMode, setCurrentPage}) => (
     </a>
 );
 
+/**
+ * Dark mode toggle button component.
+ * 
+ * @param {boolean} isDarkMode - Indicates if dark mode is active.
+ * @param {function} toggleTheme - Function to toggle the theme.
+ */
+
 const DarkModeToggle = ({isDarkMode, toggleTheme}) => (
     <button
         onClick={toggleTheme}
@@ -124,6 +158,15 @@ const DarkModeToggle = ({isDarkMode, toggleTheme}) => (
         <span className="text-2xl">{isDarkMode ? "🌙" : "☀️"}</span>
     </button>
 );
+
+/**
+ * Mobile menu component displayed on small screens.
+ * 
+ * @param {Array<string>} navItems - List of navigation items.
+ * @param {boolean} isDarkMode - Indicates if dark mode is active.
+ * @param {function} toggleTheme - Function to toggle the theme.
+ * @param {function} setCurrentPage - Function to set the current page.
+ */
 
 const MobileMenu = ({navItems, isDarkMode, toggleTheme, setCurrentPage}) => (
     <div

@@ -1,11 +1,20 @@
 import { useTheme } from "../../App.jsx";
 
+/**
+ * Contact.jsx
+ * 
+ * This page provides users with a way to contact the website's team. 
+ * It includes a form for submitting messages, as well as alternative contact 
+ * information such as email, phone, and address.
+ */
+
 const Contact = ({ setCurrentPage }) => {
   const { theme, toggleTheme } = useTheme();
   const isDarkMode = theme === "dark";
 
   return (
     <>
+      {/* Define a style block for keyframes animation */}
       <style>
         {`
           @keyframes fadeInFromTop {
@@ -23,6 +32,7 @@ const Contact = ({ setCurrentPage }) => {
           }
         `}
       </style>
+      {/* Main contact page container with dynamic theme */}
       <div
         className={`contact-page p-8 transition-colors duration-500 ease-in-out ${
           isDarkMode
@@ -44,8 +54,9 @@ const Contact = ({ setCurrentPage }) => {
           platform, need technical support, or want to provide feedback, please
           don't hesitate to contact us.
         </p>
-
+        {/* Layout: Form on the left, additional contact info on the right */}
         <div className="grid md:grid-cols-2 gap-8">
+          {/* Contact form with Name,Email,Subject,Message Areas */}
           <form
             className={`contact-form space-y-4 ${
               isDarkMode ? "bg-gray-600" : "bg-gray-200"
@@ -88,6 +99,7 @@ const Contact = ({ setCurrentPage }) => {
               required
               rows="4"
             ></textarea>
+            {/* Submit button */}
             <button
               className={`w-full p-2 rounded ${
                 isDarkMode
@@ -99,7 +111,7 @@ const Contact = ({ setCurrentPage }) => {
               Send Message
             </button>
           </form>
-
+          {/* Additional contact information */}
           <div
             className="space-y-6 opacity-0 fade-in-element"
             style={{ animationDelay: "0.4s" }}

@@ -1,6 +1,14 @@
 import {useTheme} from "../../App.jsx";
 
+/**
+ * Footer.jsx
+ * 
+ * This component renders a footer with social media icons and a copyright notice. 
+ * It also handles theme switching and provides navigation to external sites.
+ */
+
 const Footer = () => {
+    // Function to navigate to the provided URL
     const navigateTo = (url) => {
         window.location.href = url;
     };
@@ -16,6 +24,7 @@ const Footer = () => {
         }`}>
             < div className=" container px-6 pt-6 mx-auto">
                 <div className="mb-6 flex justify-center w-full">
+                    {/* Facebook Icon */}
                     <div>
                         <a
                             type="button"
@@ -35,7 +44,7 @@ const Footer = () => {
                             </svg>
                         </a>
                     </div>
-
+                    {/* Twitter Icon */}
                     <div>
                         <a
                             type="button"
@@ -55,7 +64,7 @@ const Footer = () => {
                             </svg>
                         </a>
                     </div>
-
+                    {/* Telegram Icon */}
                     <div>
                         <a
                             type="button"
@@ -75,7 +84,7 @@ const Footer = () => {
                             </svg>
                         </a>
                     </div>
-
+                    {/* Instagram Icon */}
                     <div>
                         <a
                             type="button"

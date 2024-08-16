@@ -1,10 +1,19 @@
 import { useState } from "react";
 import { useTheme } from "../../App.jsx";
 
+/**
+ * FAQ.jsx
+ * 
+ * This page serves as a Frequently Asked Questions (FAQ) section 
+ * where users can find answers to common inquiries about the Interactive 
+ * Infographics platform. The page features a list of questions that can 
+ * be expanded to reveal detailed answers. 
+ */
+
 const FAQ = () => {
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
-
+  // List of FAQs with corresponding icons, questions, and answers
   const faqs = [
     {
       question: "What is Interactive Infographics?",
@@ -88,6 +97,7 @@ const FAQ = () => {
           }
         `}
       </style>
+      {/* Main FAQ container with dynamic theme */}
       <div
         className={`min-h-screen transition-colors duration-500 ease-in-out ${
           isDarkMode
@@ -102,6 +112,7 @@ const FAQ = () => {
           >
             Explore Our FAQs <span className="ml-2">🔍</span>
           </h1>
+          {/* FAQ items list */}
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <FAQItem
@@ -117,7 +128,7 @@ const FAQ = () => {
     </>
   );
 };
-
+// FAQItem component to render individual FAQ
 const FAQItem = ({ faq, isDarkMode, animationDelay }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -128,6 +139,7 @@ const FAQItem = ({ faq, isDarkMode, animationDelay }) => {
       } opacity-0 fade-in-element`}
       style={{ animationDelay }}
     >
+      {/* FAQ question button, toggles the visibility of the answer */}
       <button
         className={`flex justify-between items-center w-full py-4 text-left text-lg font-medium ${
           isDarkMode
@@ -142,6 +154,7 @@ const FAQItem = ({ faq, isDarkMode, animationDelay }) => {
         </span>
         <span className="text-2xl">{isOpen ? "-" : "+"}</span>
       </button>
+      {/* FAQ answer, visible only if the question is open */}
       {isOpen && (
         <div
           className={`pb-4 ${isDarkMode ? "text-gray-200" : "text-gray-800"}`}

@@ -11,11 +11,25 @@ import CreatePage from "./Components/CreatePage.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+// Create context for theme and data
 export const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
 export const DataContext = createContext();
 export const useData = () => useContext(DataContext);
+
+/**
+ * 
+ * The `App` component is the main application container that:
+ * 
+ * - Manages global state for theme, user data, and current page.
+ * - Provides context for theme and data using `ThemeContext` and `DataContext`.
+ * - Renders different page components (`Home`, `ChartPage`, `UploadPage`, `CreatePage`, `About`, `Contact`, `FAQ`) based on the `currentPage` state.
+ * - Handles theme toggling and page transitions with animations and smooth scrolling.
+ * - Initializes AOS for scroll animations and ensures the page scrolls to the top on refresh.
+ * 
+ * The component includes a `Header` and `Footer` for consistent layout across different pages.
+ */
 
 const App = () => {
   const [theme, setTheme] = useState("dark");
@@ -24,10 +38,12 @@ const App = () => {
   const [fadeIn, setFadeIn] = useState(true);
   const [user, setUser] = useState(null);
 
+  // Function to toggle between light and dark themes
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
+  // Initialize AOS (Animate On Scroll) library on component mount
   useEffect(() => {
     AOS.init({ duration: 2350 });
   }, []);
@@ -40,7 +56,7 @@ const App = () => {
     }
   }, []);
 
-  // To start from top when refreshing the page
+  // Ensure the page starts at the top when refreshed or navigated away from
   useEffect(() => {
     const handleBeforeUnload = () => {
       window.scrollTo(0, 0);
@@ -51,6 +67,7 @@ const App = () => {
     };
   }, []);
 
+  // Handle page changes with optional scrolling behavior
   const handlePageChange = (page, options = {}) => {
     setFadeIn(false);
     setTimeout(() => {
@@ -69,7 +86,7 @@ const App = () => {
       }
     }, 300);
   };
-
+  // Render the current page component based on `currentPage` state
   const renderPage = () => {
     switch (currentPage) {
       case "home":

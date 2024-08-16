@@ -5,6 +5,12 @@ import ChartHeader from "./ChartHeader.jsx";
 import BackArrow from "../../assets/Charts/arrow-small-left.png";
 import Chart from "chart.js/auto";
 
+{/*
+  The purpose of this component is to serve as a flexible chart-rendering page
+  It dynamically generates various types of charts based on the provided data and adapts from provided JSON file
+  making it a reusable and visually consistent component within the app.
+*/}
+
 const ChartPage = ({ data, setCurrentPage }) => {
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
@@ -36,6 +42,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
         return generateScatterChart();
       default:
         return showChartNotSupported();
+      // Switch statement to call the appropriate chart generation function
     }
   };
 
@@ -99,7 +106,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
       },
     },
   });
-
+  // Generates the configuration for a horizontal bar chart
   const generateHorizontalBarChart = () => ({
     type: "bar",
     data: {
@@ -144,7 +151,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
       },
     },
   });
-
+  // Generates the configuration for a line chart
   const generateLineChart = () => ({
     type: "line",
     data: {
@@ -189,7 +196,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
       },
     },
   });
-
+  // Generates the configuration for a pie chart
   const generatePieChart = () => ({
     type: "pie",
     data: {
@@ -221,7 +228,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
       },
     },
   });
-
+  // Generates the configuration for a doughnut chart
   const generateDoughnutChart = () => ({
     type: "doughnut",
     data: {
@@ -253,7 +260,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
       },
     },
   });
-
+  // Generates the configuration for a polar area chart
   const generatePolarChart = () => ({
     type: "polarArea",
     data: {
@@ -285,7 +292,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
       },
     },
   });
-
+  // Generates the configuration for a radar chart
   const generateRadarChart = () => {
     const chartData = [];
     const dataColors = [
@@ -358,7 +365,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
       },
     };
   };
-
+  // Generates the configuration for a bubble chart
   const generateBubbleChart = () => {
     const chartData = data[0];
     const dataAmount = data[0].x.length;
@@ -441,7 +448,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
       },
     };
   };
-
+  // Generates the configuration for a scatter chart
   const generateScatterChart = () => {
     const chartData = data[0];
     const dataAmount = data[0].x.length;
@@ -509,7 +516,7 @@ const ChartPage = ({ data, setCurrentPage }) => {
       },
     };
   };
-
+  // Displays a message when the chart type is not supported
   const showChartNotSupported = () => {
     return (
       <div

@@ -3,6 +3,16 @@ import { FaTimesCircle, FaEye, FaEyeSlash } from "react-icons/fa";
 import { ref, get, update } from "firebase/database";
 import { database } from "../../DB/firebase.js";
 
+/**
+ * ForgotPasswordCard.jsx
+ * 
+ * This component provides a user interface for users who have forgotten 
+ * their password. It allows them to enter their email, verify their identity, 
+ * and then update their password. The component integrates with Firebase for 
+ * retrieving and updating user information. It includes a success message 
+ * upon successful password update.
+ */
+
 const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -120,6 +130,7 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
 
   return (
     <>
+      {/* Forgot Password Card */}
       {showForgotPasswordCard && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ease-in-out">
           <div
@@ -127,6 +138,7 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
               isDarkMode ? "bg-gray-600" : "bg-gray-300"
             } ${showForgotPasswordCard ? "opacity-100" : "opacity-0"}`}
           >
+            {/* Close button */}
             <button
               onClick={onClose}
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
@@ -134,9 +146,11 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
               <FaTimesCircle size={24} />
             </button>
             <h2 className="text-2xl font-bold mb-4">Forgot Password</h2>
+            {/* Display message if any */}
             {message && (
               <p className="text-red-500 mb-4 font-bold">{message}</p>
             )}
+            {/* Step 1: Email submission */}
             {step === 1 ? (
               <form onSubmit={handleEmailSubmit}>
                 <input
@@ -159,6 +173,7 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
                 </button>
               </form>
             ) : (
+              /* Step 2: Password update */
               <form onSubmit={handlePasswordUpdate}>
                 <div className="relative">
                   <input
@@ -169,6 +184,7 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
                     className="w-full p-2 mb-4 border rounded pr-10"
                     required
                   />
+                  {/* Toggle password visibility */}
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
@@ -192,6 +208,7 @@ const ForgotPasswordCard = ({ onClose, isDarkMode }) => {
           </div>
         </div>
       )}
+      {/* Success Card */}
       {showSuccessCard && <SuccessCard />}
     </>
   );

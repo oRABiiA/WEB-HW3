@@ -6,11 +6,18 @@ import { TEChart } from "tw-elements-react";
 import PropTypes from "prop-types";
 import { useRef } from "react";
 
+/**
+ * this page is designed to allow users to create and customize various types of charts, 
+ * configure their appearance and data, and display them on the page.
+ * 
+ */
+
 const CreatePage = ({ setCurrentPage }) => {
     const { theme } = useTheme();
     const isDarkMode = theme === "dark";
     const chartsRef = useRef(null);
 
+    // Options for chart size and chart type selection
     const SizeOptions = [
         { value: "1", label: "1 X 1" },
         { value: "2", label: "1 X 2" },

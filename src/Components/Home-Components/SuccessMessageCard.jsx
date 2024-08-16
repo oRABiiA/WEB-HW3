@@ -1,5 +1,12 @@
 import PropTypes from "prop-types";
 
+/**
+ * SuccessMessageCard.jsx
+ * 
+ * This component displays a modal with a success message and a close button. 
+ * It is typically used to inform the user of successful operations such as registration.
+ */
+
 const SuccessMessageCard = ({ onClose, message }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -15,10 +22,10 @@ const SuccessMessageCard = ({ onClose, message }) => {
     </div>
   );
 };
-
+// PropTypes for type checking
 SuccessMessageCard.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,// Function to call when the close button is clicked
+  message: PropTypes.string.isRequired,// Message to display in the modal
 };
 
 export default SuccessMessageCard;

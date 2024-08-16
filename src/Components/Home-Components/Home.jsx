@@ -12,6 +12,14 @@ import { database } from "../../DB/firebase.js";
 import ForgotPasswordCard from "./ForgotPasswordCard.jsx";
 import SuccessMessageCard from "./SuccessMessageCard.jsx";
 
+/**
+ * Home.jsx
+ * 
+ * This component represents the home page of the application. It provides 
+ * functionality for users to log in, register, or recover their passwords. The page 
+ * dynamically renders content based on whether the user is logged in or not, and it 
+ * includes modals for registration, password recovery, and success messages.
+ */
 
 const Home = ({ setCurrentPage, user, setUser }) => {
   const { theme } = useTheme();

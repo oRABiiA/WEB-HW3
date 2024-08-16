@@ -1,11 +1,15 @@
 import { useTheme } from "../../App.jsx";
-
+{/*
+  this page is meant to create a visually appealing and informative section 
+  that both explains the value of the website and encourages user engagement.
+*/}
 const About = ({ setCurrentPage }) => {
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
 
   return (
     <>
+      {/* Define a style block for keyframes animation */}
       <style>
         {`
           @keyframes fadeInFromTop {
@@ -23,6 +27,7 @@ const About = ({ setCurrentPage }) => {
           }
         `}
       </style>
+      {/* Container for the page content with conditional background and text colors */}
       <div
         className={`flex flex-col min-h-screen transition-colors duration-500 ease-in-out ${
           isDarkMode
@@ -30,6 +35,7 @@ const About = ({ setCurrentPage }) => {
             : "bg-customBlue text-gray-800"
         }`}
       >
+        {/* Main content area */}
         <main className="flex-grow max-w-4xl mx-auto px-4 py-8">
           <h1
             className="text-3xl font-bold mb-6 opacity-0 fade-in-element"
