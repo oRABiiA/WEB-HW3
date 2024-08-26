@@ -2,10 +2,22 @@ import {useTheme} from "../../App.jsx";
 import {useState} from "react";
 import {TECollapse} from "tw-elements-react";
 
+
+/**
+ * InfoCard component renders an informational card with a collapsible section
+ * for displaying instructions on how to upload various types of JSON files
+ * for creating different charts.
+ */
 const InfoCard = () => {
+    // Retrieves the current theme (light or dark) from the App context.
     const {theme} = useTheme();
+
+    // Manages the state for which accordion element is currently active (expanded).
     const [activeElement, setActiveElement] = useState("");
 
+    /**
+     * Handles the click event to toggle the visibility of the accordion sections.
+     */
     const handleClick = (value) => {
         setActiveElement(value === activeElement ? "" : value);
     };
@@ -14,6 +26,7 @@ const InfoCard = () => {
         <div className={`transition-colors duration-500 ease-in-out ${theme === "light" ? "bg-customBlue" : "bg-customDark"}`}>
             <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8 pb-32 py-0">
                 <div className={`relative isolate overflow-hidden rounded-3xl ${theme === "light" ? "bg-white" : "bg-gray-900"} px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0`}>
+                    {/* Background SVG element for visual decoration */}
                     <svg viewBox="0 0 1024 1024" aria-hidden="true" className="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0">
                         <circle r={512} cx={512} cy={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity={theme === "light" ? 0.9 : 0.3}/>
                         <defs>
@@ -23,13 +36,17 @@ const InfoCard = () => {
                             </radialGradient>
                         </defs>
                     </svg>
+
+                    {/* Title Section */}
                     <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
                         <h2 className={`text-3xl font-bold tracking-tight ${theme === "light" ? "text-gray-900" : "text-white"} sm:text-4xl`}>
                             How To upload <strong className={`${theme === "light" ? "text-red-300" : "text-cyan-400"}`}>JSON</strong> Files
                         </h2>
                     </div>
+
+                    {/* Accordion Section */}
                     <div className="w-full mt-8 mb-8 lg:mt-12 lg:mb-12">
-                        {/* Accordion Item #1 */}
+                        {/* Accordion Item #1 - Bar, Line, Horizontal Bar & Radar Charts */}
                         <div className={`w-full rounded-xl border-0 mb-1 ${theme === "light" ? "bg-gray-700 border-gray-700 text-white" : "bg-gray-500 border-gray-900 text-gray-900"}`}>
                             <h2 className="mb-0 font-bold" id="headingOne">
                                 <button
@@ -93,7 +110,9 @@ const InfoCard = () => {
                                 </div>
                             </TECollapse>
                         </div>
-                        {/* Accordion Item #2 */}
+
+
+                        {/* Accordion Item #2 - Pie, Doughnut & Polar Charts */}
                         <div className={`w-full rounded-xl border-0 mb-1 ${theme === "light" ? "bg-gray-700 border-gray-700 text-white" : "bg-gray-500 border-gray-900 text-gray-900"}`}>
                             <h2 className="mb-0 font-bold" id="headingTwo">
                                 <button
@@ -159,7 +178,8 @@ const InfoCard = () => {
                                 </div>
                             </TECollapse>
                         </div>
-                        {/* Accordion Item #3 */}
+
+                        {/* Accordion Item #3 - Bubble Chart */}
                         <div className={`w-full rounded-xl border-0 mb-1 ${theme === "light" ? "bg-gray-700 border-gray-700 text-white" : "bg-gray-500 border-gray-900 text-gray-900"}`}>
                             <h2 className="mb-0 font-bold" id="headingThree">
                                 <button
@@ -219,7 +239,9 @@ const InfoCard = () => {
                                 </div>
                             </TECollapse>
                         </div>
-                        {/* Accordion Item #4 */}
+
+
+                        {/* Accordion Item #4 - Scatter Chart */}
                         <div className={`w-full rounded-xl border-0 mb-1 ${theme === "light" ? "bg-gray-700 border-gray-700 text-white" : "bg-gray-500 border-gray-900 text-gray-900"}`}>
                             <h2 className="mb-0 font-bold" id="headingFour">
                                 <button
